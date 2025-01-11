@@ -8,6 +8,27 @@
 </div>
 
 ## About the project
+
+### `.env` File Pattern:
+To run this server you must create a `.env` file. There must have some secret key. 
+```typescript
+Bcrypt_Salt_Rounds= **
+Default_Pass= ***
+PORT= 5000 or as your wish
+Node_Env= Development or Production
+DB_Url= ***
+Jwt_Access_Token= ***
+```
+#### Tips:
+To generate jwt access token without much hustle and make token little bit more strong you can follow the steps:
+1. Go to Terminal or press `Ctrl + J`
+2. Write `node` then press `enter`
+3. Then write
+```bash
+require('crypto').randomBytes(64).toString('hex') 
+``` 
+ If you want to generate 32 bit then replace 64 instead of 32.
+
 ### Error Pattern:
 All the error are same pattern as below. 
 
@@ -19,6 +40,16 @@ errorSources: [
   message: ***,
 ],
 stack: "see full stack if it is run in development phase otherwise it show null"
+```
+
+### Response pattern:
+All the response are same pattern as below.
+
+```bash
+statusCode: ***,
+success: true or false,
+message: ***,
+data: ***
 ```
 
 ## How to Create a Similar Project?
@@ -60,7 +91,7 @@ Now create folder in root named `dist` and find out `"//outDir": "./", `. Uncomm
 keep other thing as default.
 
 **Step-6** 
-Install mongoose (MongoDB), http-status-codes (HTTP codes), zod (validation), cors (CORS handling), bcrypt (password hashing), dotenv (environment variables), and lint-staged (pre-commit linting), ts-node-dev (running ts code).
+Install mongoose (MongoDB), http-status-codes (HTTP codes), zod (validation), cors (CORS handling), bcrypt (password hashing), dotenv (environment variables), and lint-staged (pre-commit linting), ts-node-dev (running ts code), jwt(access token).
 ```typescript
 npm i mongoose
 npm i zod
@@ -70,6 +101,7 @@ npm i bcrypt
 npm i dotenv
 npm i lint-staged
 npm i ts-node-dev
+npm i jsonwebtoken
 ```
 
 **Step-7**

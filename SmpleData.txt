@@ -1,0 +1,35 @@
+
+
+// Example users
+const users: TUser[] = [
+  {
+    name: "Alice Johnson",
+    email: "alice.johnson@example.com",
+    password: "securepassword1",
+    role: "admin",
+    isBlocked: false,
+  },
+  {
+    name: "Bob Smith",
+    email: "bob.smith@example.com",
+    password: "securepassword2",
+    role: "user",
+    isBlocked: false,
+  },
+  {
+    name: "Carol Brown",
+    email: "carol.brown@example.com",
+    password: "securepassword3",
+    role: "user",
+    isBlocked: true,
+  },
+  {
+    name: "David Lee",
+    email: "david.lee@example.com",
+    password: "securepassword4",
+    role: "admin",
+    isBlocked: false,
+  },
+];
+
+console.log(users);

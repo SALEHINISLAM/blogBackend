@@ -1,7 +1,7 @@
-import express from "express"
-import { AuthControllers } from "./auth.controller"
+// import express from "express"
+// import { AuthControllers } from "./auth.controller"
 
-const router= express.Router()
-router.post('/login',AuthControllers.loginUser)
+// const router= express.Router()
+// router.post('/login',AuthControllers.loginUser)
 
-export const LoginUserRoutes=router
+// export const LoginUserRoutes=router
