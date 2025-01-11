@@ -10,7 +10,7 @@ const loginUser = async (payload: TLoginUser) => {
     //checking if the user is exists
     const isUserExists = await UserModel.findOne({ email: payload?.email })
     if (!isUserExists) {
-        throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !')
+        throw new AppError(401, 'Invalid credentials')
     }
     else if (isUserExists.isBlocked) {
         throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked !')

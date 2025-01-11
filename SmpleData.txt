@@ -5,8 +5,8 @@ const users: TUser[] = [
   {
     name: "Alice Johnson",
     email: "alice.johnson@example.com",
-    password: "securepassword1",
-    role: "admin",
+    password: "123456789",
+    role: "user",
     isBlocked: false,
   },
   {

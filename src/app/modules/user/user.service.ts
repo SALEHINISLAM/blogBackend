@@ -19,8 +19,20 @@ const createUserIntoDB = async (payload: TUser) => {
     } catch (error) {
         await session.abortTransaction()
         await session.endSession()
-        throw new AppError(httpStatus.INTERNAL_SERVER_ERROR,"internal Server Error")
+        throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, "User already exists")
     }
 }
 
-export const UserServices = { createUserIntoDB }
+const blockUser = async (userId: string) => {
+    const user = await UserModel.findOne({ _id: userId, isBlocked: false })
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not Found")
+    }
+    else if (user?.role === "admin") {
+        throw new AppError(httpStatus.UNAUTHORIZED, "You can't remove an admin")
+    }
+    const result = await UserModel.findByIdAndUpdate(userId, { isBlocked: true }, { upsert: false })
+    return result;
+}
+
+export const UserServices = { createUserIntoDB ,blockUser}
