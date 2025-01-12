@@ -88,7 +88,7 @@ const deleteBlogsFromDB = async (blogId: string, email: string) => {
         const user = await UserModel.findOne({ isBlocked: false, email: email }).session(session)
         if (user?._id.equals(nonDeletedBlog.author) || user?.role === 'admin') {
             // Update the blog
-            const updatedBlog = await BlogModel.findByIdAndUpdate(blogId, { isDeleted: true }, {
+            const updatedBlog = await BlogModel.findByIdAndUpdate(blogId, { isDeleted: true,isPublished:false }, {
                 new: true,
                 session,
                 runValidators: true,
@@ -104,9 +104,40 @@ const deleteBlogsFromDB = async (blogId: string, email: string) => {
     } catch (error: any) {
         await session.abortTransaction()
         throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, error.message as string)
-    }finally{
+    } finally {
         await session.endSession()
     }
 }
 
-export const BlogServices = { createBlogIntoDB, updateBlogIntoDB, deleteBlogsFromDB }
+const getAllBlogs = async (query: {
+    search?: string, sortBy?: string, sortOrder?: string, filter?: string
+}) => {
+    const { search, sortBy, sortOrder, filter } = query
+    const searchCriteria: any = {
+        isDeleted:false,
+        isPublished:true
+    }
+    const sortCriteria: any = {}
+    //search by title or content
+    if (search) {
+        searchCriteria.$or = [
+            { title: { $regex: search, $options: "i" } },
+            { content: { $regex: search, $options: "i" } }
+        ];
+    }
+    //filter by author
+    if (filter) {
+        searchCriteria.author=filter
+    }
+    //sort criteria
+    if (sortBy) {
+        sortCriteria[sortBy]=sortOrder==="desc"? -1:1
+    }
+
+    //fetch blogs
+    const blogs= await BlogModel.find(searchCriteria).sort(sortCriteria)
+
+    return blogs
+}
+
+export const BlogServices = { createBlogIntoDB, updateBlogIntoDB, deleteBlogsFromDB,getAllBlogs }
