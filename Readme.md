@@ -189,18 +189,37 @@
 
 ```json
 {
-  "success": true,
-  "message": "Blog created successfully",
-  "statusCode": 201,
-  "data": {
-    "_id": "string",
-    "title": "string",
-    "content": "string",
-    "author": { "details" }
-  }
+    "success": true,
+    "message": "Blog created successfully",
+    "statusCode": 200,
+    "data": {
+        "title": "My First Blog1",
+        "content": "This is the content of my blog1.",
+        "author": "6782b775e6308e0f74f28093",
+        "isPublished": true,
+        "_id": "678368f34542bf7873767a45",
+        "createdAt": "2025-01-12T07:02:11.054Z",
+        "updatedAt": "2025-01-12T07:02:11.054Z",
+        "__v": 0
+    }
 }
 ```
 
+* **Failure**
+```json
+{
+    "success": false,
+    "message": "You are not Authorized user !",
+    "statusCode": 401,
+    "errorSources": [
+        {
+            "path": "",
+            "message": "You are not Authorized user !"
+        }
+    ],
+    "stack": "Error: You are not Authorized user !\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:24:23\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\jsonwebtoken\\verify.js:261:12\n    at getSecret (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\jsonwebtoken\\verify.js:97:14)\n    at Object.module.exports [as verify] (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\jsonwebtoken\\verify.js:101:10)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:17:13\n    at Generator.next (<anonymous>)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:4:12)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:10:78"
+}
+```
 ####   
 
 #### 2.2 Update Blog
