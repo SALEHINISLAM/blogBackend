@@ -10,7 +10,7 @@
 ## About the project
 A brief description about the project is described in the Video:
 <div align="center">
-[![Watch the video](https://raw.githubusercontent.com/SALEHINISLAM/blogBackend/main/thumbnail.webp)](https://www.youtube.com/watch?v=vzuWjyFGPPw)
+[![Click to watch the video](https://img.youtube.com/vi/vzuWjyFGPPw/0.jpg)](https://www.youtube.com/watch?v=vzuWjyFGPPw)
 </div>
 
 
