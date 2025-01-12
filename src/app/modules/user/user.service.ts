@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import { TUser } from "./user.interface";
 import UserModel from "./user.model";
 import AppError from "../../errors/AppError";
@@ -9,11 +9,11 @@ const createUserIntoDB = async (payload: TUser) => {
     const session = await mongoose.startSession();
     try {
         session.startTransaction()
-        const isEmailExists = await UserModel.findOne({ email: payload?.email })
+        const isEmailExists = await UserModel.findOne({ email: payload?.email }).session(session)
         if (isEmailExists) {
             throw new AppError(400, "Validation error")
         }
-        const result = await UserModel.create(payload)
+        const result = await UserModel.create([{...payload}],{session})
         await session.commitTransaction()
         await session.endSession()
         return result

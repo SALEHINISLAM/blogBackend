@@ -1,4 +1,4 @@
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 import AppError from "../../errors/AppError";
 import UserModel from "../user/user.model";
 import { TBlog } from "./blog.interface";
