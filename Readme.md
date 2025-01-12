@@ -4,14 +4,14 @@
 
 <!-- Center align and set a custom width for the image -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/SALEHINISLAM/blogBackend/main/erDiagram.png" alt="Entity Relationship Diagram" width="500">
+  <img src="https://raw.githubusercontent.com/SALEHINISLAM/blogBackend/main/erDiagram.png" alt="Entity Relationship Diagram" width="100%">
 </div>
 
 ## About the project
 A brief description about the project is described in the Video:
-<div align="center">
+
 [![Click to watch the video](https://img.youtube.com/vi/vzuWjyFGPPw/0.jpg)](https://www.youtube.com/watch?v=vzuWjyFGPPw)
-</div>
+
 
 
 ### API Endpoints:
