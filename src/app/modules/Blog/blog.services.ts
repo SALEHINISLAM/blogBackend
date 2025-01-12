@@ -20,11 +20,11 @@ const createBlogIntoDB = async (payload: TBlog, userEmail: string) => {
             throw new AppError(httpStatus.UNAUTHORIZED, "User not found")
         }
         newBlog.author = isUserExists._id
-        const result = await BlogModel.create([{...newBlog}],{session})
+        const result = await BlogModel.create([{ ...newBlog }], { session })
         await session.commitTransaction()
         await session.endSession()
         return result[0]
-    } catch (error:any) {
+    } catch (error: any) {
         await session.abortTransaction()
         await session.endSession()
         throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, error.message as string)
@@ -32,4 +32,81 @@ const createBlogIntoDB = async (payload: TBlog, userEmail: string) => {
 
 }
 
-export const BlogServices = { createBlogIntoDB }
+const updateBlogIntoDB = async (payload: Partial<TBlog>, blogId: string, email: string) => {
+    const session = await mongoose.startSession()
+    try {
+        session.startTransaction()
+        const oldBlog = await BlogModel.findById(blogId).session(session)
+        if (!oldBlog) {
+            throw new AppError(httpStatus.NOT_FOUND, "Blog not found")
+        }
+        const user = await UserModel.findOne({ _id: oldBlog?.author, isBlocked: false, email: email })
+        if (!user) {
+            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to update it!")
+        }
+        // destructure updates
+        const { title, content, ...remainingBlogData } = payload
+        const modifiedUpdatedData: Record<string, unknown> = {
+            ...remainingBlogData,
+        };
+        // Handle `title` updates
+        if (title) {
+            modifiedUpdatedData["title"] = title;
+        }
+
+        // Handle `content` updates
+        if (content) {
+            modifiedUpdatedData["content"] = content;
+        }
+        // Update the blog
+        const updatedBlog = await BlogModel.findByIdAndUpdate(blogId, modifiedUpdatedData, {
+            new: true,
+            session,
+            runValidators: true,
+        });
+        if (!updatedBlog) {
+            throw new AppError(httpStatus.NOT_FOUND, "Failed to update the blog");
+        }
+        await session.commitTransaction();
+        await session.endSession()
+        return updatedBlog;
+    } catch (error: any) {
+        await session.abortTransaction()
+        await session.endSession()
+        throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, error.message as string)
+    }
+}
+
+const deleteBlogsFromDB = async (blogId: string, email: string) => {
+    const session = await mongoose.startSession()
+    try {
+        session.startTransaction()
+        const nonDeletedBlog = await BlogModel.findOne({ _id: blogId, isDeleted: false }).session(session)
+        if (!nonDeletedBlog) {
+            throw new AppError(httpStatus.NOT_FOUND, "Blog not found")
+        }
+        const user = await UserModel.findOne({ isBlocked: false, email: email }).session(session)
+        if (user?._id.equals(nonDeletedBlog.author) || user?.role === 'admin') {
+            // Update the blog
+            const updatedBlog = await BlogModel.findByIdAndUpdate(blogId, { isDeleted: true }, {
+                new: true,
+                session,
+                runValidators: true,
+            });
+            if (!updatedBlog) {
+                throw new AppError(httpStatus.NOT_FOUND, "Failed to delete the blog");
+            }
+            await session.commitTransaction();
+            return updatedBlog;
+        } else {
+            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to delete it!")
+        }
+    } catch (error: any) {
+        await session.abortTransaction()
+        throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, error.message as string)
+    }finally{
+        await session.endSession()
+    }
+}
+
+export const BlogServices = { createBlogIntoDB, updateBlogIntoDB, deleteBlogsFromDB }

@@ -178,8 +178,8 @@
 
 ```json
 {
-  "title": "My First Blog",
-  "content": "This is the content of my blog."
+  "title": "My First Blog1",
+  "content": "This is the content of my blog1."
 }
 ```
 
@@ -245,25 +245,43 @@
 
 ```json
 {
-  "success": true,
-  "message": "Blog updated successfully",
-  "statusCode": 200,
-  "data": {
-    "_id": "string",
-    "title": "string",
-    "content": "string",
-    "author": { "details" }
-  }
+    "success": true,
+    "message": "Blog updated successfully",
+    "statusCode": 200,
+    "data": {
+        "_id": "678368f34542bf7873767a45",
+        "title": "My Second Blog",
+        "content": "This is the content of my second blog.",
+        "author": "6782b775e6308e0f74f28093",
+        "isPublished": true,
+        "createdAt": "2025-01-12T07:02:11.054Z",
+        "updatedAt": "2025-01-12T08:30:05.390Z",
+        "__v": 0
+    }
 }
 ```
-
+* **Failure**
+```json
+{
+    "success": false,
+    "message": "You are not Authorized user !",
+    "statusCode": 401,
+    "errorSources": [
+        {
+            "path": "",
+            "message": "You are not Authorized user !"
+        }
+    ],
+    "stack": "Error: You are not Authorized user !\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:14:19\n    at Generator.next (<anonymous>)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:4:12)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:10:78\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\utilitis\\catchAsync.ts:5:25\n    at Layer.handle [as handle_request] (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:119:3)"
+}
+```
 ####   
 
 #### 2.3 Delete Blog
 
 **DELETE** `/api/blogs/:id`
 
-**Description:** Allows a logged-in user to delete their own blog by its ID.
+**Description:** Allows a logged-in user to delete their own blog by its ID. Admin also delete any blog with this route.
 
 **Request Header:**`Authorization: Bearer <token>`
 
@@ -273,12 +291,37 @@
 
 ```json
 {
-  "success": true,
-  "message": "Blog deleted successfully",
-  "statusCode": 200
+    "success": true,
+    "message": "Blog deleted successfully",
+    "statusCode": 200,
+    "data": {
+        "_id": "678386db5ada34f5ac799575",
+        "title": "My First Blog",
+        "content": "This is the content of my blog.",
+        "author": "6782b775e6308e0f74f28093",
+        "isPublished": true,
+        "isDeleted": true,
+        "createdAt": "2025-01-12T09:09:47.902Z",
+        "updatedAt": "2025-01-12T09:19:40.748Z",
+        "__v": 0
+    }
 }
 ```
-
+* **Failure**
+```json
+{
+    "success": false,
+    "message": "You are not Authorized user !",
+    "statusCode": 401,
+    "errorSources": [
+        {
+            "path": "",
+            "message": "You are not Authorized user !"
+        }
+    ],
+    "stack": "Error: You are not Authorized user !\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:14:19\n    at Generator.next (<anonymous>)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:4:12)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:10:78\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\utilitis\\catchAsync.ts:5:25\n    at Layer.handle [as handle_request] (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:119:3)"
+}
+```
 ####   
 
 #### 2.4 Get All Blogs (Public)

@@ -20,6 +20,10 @@ const BlogSchema = new Schema<TBlog>({
     isPublished: {
         type: Boolean,
         default: true
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
 }, {
     timestamps: true

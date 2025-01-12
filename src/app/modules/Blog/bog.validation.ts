@@ -12,6 +12,7 @@ export const createBlogValidationSchema = z.object({
         author: z.string()
             .regex(/^[0-9a-fA-F]{24}$/, { message: "Author must be a valid ObjectId" }).optional(),
         isPublished: z.boolean().optional(),
+        isDeleted:z.boolean().optional()
     })
 });
 
