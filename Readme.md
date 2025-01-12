@@ -37,17 +37,30 @@ The backend will be built with a focus on security and scalability, incorporatin
 * Express.js
 * MongoDB with Mongoose
 
-### API Endpoints:
+### Features
+#### User Role
+* Admin
+    - Will be created manually in the database with predefined credentials.
+    - Can delete any blog.
+    - Can block any user by updating a property `isBlocked`.
+    - Cannot update any blog.
+* User
+    - Can register and log in.
+    - Can create blogs (only when logged in).
+    - Can update and delete their own blogs.
+    - Cannot perform admin actions.
+* * *
+#### Authentication and Authorization
 
-#### Authentication:
+* *Authentication:*
 
-*   Users must log in to perform write, update, and delete operations.
+    *   Users must log in to perform write, update, and delete operations.
 
-#### Authorization:
+* *Authorization:*
 
-*   Admin and User roles must be differentiated and secured.
+    *   Admin and User roles must be differentiated and secured.
 
-### 3\. Blog API
+#### Blog API
 
 *   A public API for reading blogs:
     *   Includes blog title, content, author details & other necessary information.
@@ -55,7 +68,7 @@ The backend will be built with a focus on security and scalability, incorporatin
 
 * * *
 
-## Models
+#### Models
 
   
 
@@ -79,14 +92,15 @@ The backend will be built with a focus on security and scalability, incorporatin
 *   `isPublished`: boolean – A flag indicating whether the blog post is published. Default is true (published).
 *   `createdAt`: Date – The timestamp when the blog post was created.
 *   `updatedAt`: Date – The timestamp of the last update to the blog post.
+*   `isDeleted`: boolean - A flag indicating whether the blog is deleted. Default is false (not deleted).
 
-##   
+  
+* * *
+#### API Endpoints
 
-## API Endpoints
+##### 1\. Authentication
 
-### 1\. Authentication
-
-#### 1.1 Register User
+###### 1.1 Register User
 
 **POST** `/api/auth/register`
 
@@ -141,9 +155,9 @@ The backend will be built with a focus on security and scalability, incorporatin
 }
 ```
 
-####   
+######   
 
-#### 1.2 Login User
+###### 1.2 Login User
 
 **POST** `/api/auth/login`
 
@@ -190,11 +204,11 @@ The backend will be built with a focus on security and scalability, incorporatin
 }
 ```
 
-###   
+#####   
 
-### 2\. Blog Management
+##### 2\. Blog Management
 
-#### 2.1 Create Blog
+###### 2.1 Create Blog
 
 **POST** `/api/blogs`
 
@@ -248,9 +262,9 @@ The backend will be built with a focus on security and scalability, incorporatin
     "stack": "Error: You are not Authorized user !\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:24:23\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\jsonwebtoken\\verify.js:261:12\n    at getSecret (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\jsonwebtoken\\verify.js:97:14)\n    at Object.module.exports [as verify] (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\jsonwebtoken\\verify.js:101:10)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:17:13\n    at Generator.next (<anonymous>)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:4:12)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:10:78"
 }
 ```
-####   
+######   
 
-#### 2.2 Update Blog
+###### 2.2 Update Blog
 
 **PATCH** `/api/blogs/:id`
 
@@ -303,9 +317,9 @@ The backend will be built with a focus on security and scalability, incorporatin
     "stack": "Error: You are not Authorized user !\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:14:19\n    at Generator.next (<anonymous>)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:4:12)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:10:78\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\utilitis\\catchAsync.ts:5:25\n    at Layer.handle [as handle_request] (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:119:3)"
 }
 ```
-####   
+######   
 
-#### 2.3 Delete Blog
+###### 2.3 Delete Blog
 
 **DELETE** `/api/blogs/:id`
 
@@ -350,9 +364,9 @@ The backend will be built with a focus on security and scalability, incorporatin
     "stack": "Error: You are not Authorized user !\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:14:19\n    at Generator.next (<anonymous>)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:4:12)\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\middleware\\auth.ts:10:78\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\utilitis\\catchAsync.ts:5:25\n    at Layer.handle [as handle_request] (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\node_modules\\express\\lib\\router\\route.js:119:3)"
 }
 ```
-####   
+######   
 
-#### 2.4 Get All Blogs (Public)
+###### 2.4 Get All Blogs (Public)
 
 **GET** `/api/blogs`
 
@@ -418,11 +432,11 @@ In this example:
 }
 ```
 
-###   
+#####   
 
-### 3\. Admin Actions
+##### 3\. Admin Actions
 
-#### 3.1 Block User
+###### 3.1 Block User
 
 **PATCH** `/api/admin/users/:userId/block`
 
@@ -457,9 +471,9 @@ In this example:
     "stack": "Error: User not Found\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\modules\\user\\user.service.ts:29:15\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\modules\\user\\user.service.ts:5:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"
 }
 ```
-####   
+######   
 
-#### 3.2 Delete Blog
+###### 3.2 Delete Blog
 
 **DELETE** `/api/admin/blogs/:id`
 
@@ -510,26 +524,10 @@ In this example:
 
   
 
-## Bonus Section
 
-### 1\. Error Handling
+####  Error Handling
 
 Error handling is crucial in ensuring that an application responds gracefully to unexpected situations, providing users with meaningful feedback while maintaining system stability. A well-structured error response format helps in identifying and diagnosing issues effectively.
-
-#### Common Error Response Format
-
-To maintain consistency across all API endpoints, the following error response structure will be used:
-
-```json
-{
-  "success": false,
-  "message": "Error message describing the issue",
-  "statusCode": 400, // or other relevant HTTP status code
-  "error": {"details": "Additional error details, if applicable"},
-  "stack": "error stack trace, if available"
-}
-```
-
 
 
 ### `.env` File Pattern:
@@ -670,3 +668,6 @@ to fix formatting code with prettier
 ```bash
 npm run prettier:fix
 ```
+
+**Step-8**
+Now code according to requirement.
