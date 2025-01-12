@@ -12,7 +12,30 @@ A brief description about the project is described in the Video:
 
 [![Click to watch the video](https://img.youtube.com/vi/vzuWjyFGPPw/0.jpg)](https://www.youtube.com/watch?v=vzuWjyFGPPw)
 
+### Project Overview:
+The objective of this project is to design and implement a backend for a blogging platform that supports user-generated content and administrative management. The system distinguishes between two user roles: **Admin** and **User**.
+ * Admin Role:
+ Admins possess elevated privileges, allowing them to manage user accounts and their blogs, including the ability to add, edit, or delete any blog.
 
+ * User Role:
+ Users can perform **CRUD operations (Create, Read, Update, Delete)** on their own blogs, enabling them to publish and manage their content.
+
+The backend will be built with a focus on security and scalability, incorporating:
+ - Secure Authentication:
+ To ensure only authorized access to the system.
+ - Role-Based Access Control:
+ To differentiate between Admin and User capabilities.
+ - Public API:
+ Allowing visitors to view blogs with advanced features like:
+    * Search: Quickly find blogs based on keywords.
+    * Sorting: Order blogs by date, popularity, or other parameters.
+    * Filtering: Narrow down blogs based on categories, tags, or other attributes.
+
+### Technologies:
+* TypeScript
+* Node.js
+* Express.js
+* MongoDB with Mongoose
 
 ### API Endpoints:
 
