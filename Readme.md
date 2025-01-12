@@ -9,8 +9,8 @@
 
 ## About the project
 A brief description about the project is described in the Video:
-<div align= center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vzuWjyFGPPw?si=AaIJPjLe9Y8nMwNw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div align="center">
+[![Watch the video](https://raw.githubusercontent.com/SALEHINISLAM/blogBackend/main/thumbnail.webp)](https://www.youtube.com/watch?v=vzuWjyFGPPw)
 </div>
 
 
