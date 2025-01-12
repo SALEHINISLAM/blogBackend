@@ -330,12 +330,27 @@ In this example:
 
 ```json
 {
-  "success": true,
-  "message": "User blocked successfully",
-  "statusCode": 200
+    "success": true,
+    "message": "User blocked successfully",
+    "statusCode": 200,
+    "data": null
 }
 ```
-
+* **Failure**
+```json
+{
+    "success": false,
+    "message": "User not Found",
+    "statusCode": 404,
+    "errorSources": [
+        {
+            "path": "",
+            "message": "User not Found"
+        }
+    ],
+    "stack": "Error: User not Found\n    at C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\modules\\user\\user.service.ts:29:15\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\User\\Desktop\\NextLevelCourse\\blogBackend\\src\\app\\modules\\user\\user.service.ts:5:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"
+}
+```
 ####   
 
 #### 3.2 Delete Blog

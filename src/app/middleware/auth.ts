@@ -1,4 +1,4 @@
-import jwt, { decode, JwtPayload } from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import AppError from "../errors/AppError";
 import catchAsync from "../utilitis/catchAsync";
 import { NextFunction, Request, Response } from "express";
