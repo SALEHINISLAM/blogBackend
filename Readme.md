@@ -98,9 +98,9 @@ The backend will be built with a focus on security and scalability, incorporatin
 * * *
 #### API Endpoints
 
-##### 1\. Authentication
+##### 1\. **Authentication**
 
-###### 1.1 Register User
+##### 1.1 Register User
 
 **POST** `/api/auth/register`
 
@@ -155,9 +155,9 @@ The backend will be built with a focus on security and scalability, incorporatin
 }
 ```
 
-######   
+#####   
 
-###### 1.2 Login User
+##### 1.2 Login User
 
 **POST** `/api/auth/login`
 
@@ -206,9 +206,9 @@ The backend will be built with a focus on security and scalability, incorporatin
 
 #####   
 
-##### 2\. Blog Management
+##### 2\. **Blog Management**
 
-###### 2.1 Create Blog
+##### 2.1 Create Blog
 
 **POST** `/api/blogs`
 
@@ -264,7 +264,7 @@ The backend will be built with a focus on security and scalability, incorporatin
 ```
 ######   
 
-###### 2.2 Update Blog
+##### 2.2 Update Blog
 
 **PATCH** `/api/blogs/:id`
 
@@ -319,7 +319,7 @@ The backend will be built with a focus on security and scalability, incorporatin
 ```
 ######   
 
-###### 2.3 Delete Blog
+##### 2.3 Delete Blog
 
 **DELETE** `/api/blogs/:id`
 
@@ -366,7 +366,7 @@ The backend will be built with a focus on security and scalability, incorporatin
 ```
 ######   
 
-###### 2.4 Get All Blogs (Public)
+##### 2.4 Get All Blogs (Public)
 
 **GET** `/api/blogs`
 
@@ -434,9 +434,9 @@ In this example:
 
 #####   
 
-##### 3\. Admin Actions
+##### 3\. **Admin Actions**
 
-###### 3.1 Block User
+##### 3.1 Block User
 
 **PATCH** `/api/admin/users/:userId/block`
 
@@ -473,7 +473,7 @@ In this example:
 ```
 ######   
 
-###### 3.2 Delete Blog
+##### 3.2 Delete Blog
 
 **DELETE** `/api/admin/blogs/:id`
 
@@ -572,6 +572,17 @@ statusCode: ***,
 success: true or false,
 message: ***,
 data: ***
+```
+
+## How to use the code?
+- Clone the github repository.
+```bash
+git clone https://github.com/SALEHINISLAM/blogBackend.git
+```
+- Into the folder include the required files like `.env`.
+- Run command 
+```bash
+npm install
 ```
 
 ## How to Create a Similar Project?
